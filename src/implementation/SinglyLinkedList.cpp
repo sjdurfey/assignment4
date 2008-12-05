@@ -8,11 +8,8 @@ using namespace std;
 ////////////////////////////////////////
 
 template <typename T>
-SinglyLinkedList<T>::SinglyLinkedList()
+SinglyLinkedList<T>::SinglyLinkedList():len(0),head(0),tail(0)
 {
-    len = 0;
-    head=NULL;
-    tail=NULL;
 }
 
 template <typename T>
@@ -55,6 +52,8 @@ T & SinglyLinkedList<T>::iterator::operator*()
 }
 
 ////////////////////////////////////////
+//creates a temporary iterator instance. assigns its iterator to the
+//beginning of the list, and returns the temporary iterator
 
 template <typename T>
 typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::begin()
@@ -65,6 +64,8 @@ typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::begin()
 
 }
 
+//creates a temporary iterator instance. assigns its iterator to the
+//end of the list, and returns the temporary iterator
 template <typename T>
 typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::end()
 {
@@ -73,6 +74,8 @@ typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::end()
   return temp;
 }
 
+//creates a temporary node instance, assigns the values appropriately
+//sets tail to head when the list is empty, increases length of list.
 template <typename T>
 void SinglyLinkedList<T>::push_front(const T & x)
 {

@@ -6,6 +6,8 @@
 
 using namespace std;
 
+//returns the integer value of a string as passed to it from the functions
+//vectStr and vectPtr, which are defined in LinkedListSort.cpp
 int stringToInt(const string & s)
 {
 	return atoi(s.c_str());
@@ -48,6 +50,9 @@ bool readMultiword(string & s, istream & infile,
     return true;
 }
 
+//calls readMultiWord, takes each string received and pushes it onto the vector.
+//returns true to loop in 'main()' if it is not end of file. other wise it will
+//return false when end of file is reached, as indicated from readMultiWord()
 bool readMultiwordVector(vector<string> & v, istream & infile,
     const string & sep /* = "#" */)
 {

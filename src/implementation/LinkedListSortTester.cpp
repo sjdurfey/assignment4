@@ -1,8 +1,21 @@
 ////////////////////////////////////////
 // LinkedListSortTester.cpp
-#include <sys/types.h>
-#include <sys/times.h>
-#include <sys/param.h>
+//Name: Stephen Durfey && Chris Mares
+//Class: CS335
+//Prof: Dr. Michael Poor
+//Date: 12/4/2008
+//Purpose: This program implements the bubble sort in two different ways. It accepts 2 command line arguments,
+//		 as well as 2 flags. The first arugment specifies which file to read into the program.
+//		 One flag specifies what type of data structure will be used. The other flag specifies to use a linked list.
+//		 Firstly it will sort a list of city data (as specified by the user at the command line) using the bubble sort.
+//		 While bubble sort is running, it will be timed. After the sorting is complete, and the time it ran is determined,
+//		 it will print out the first 100 lines of sorted city data, keyed by the last string in the row. After this,
+//		 the program will determine the memory footprint of the linked list and report it to the user.
+
+
+#include <sys/types.h> //used for timing
+#include <sys/times.h> //used for timing
+#include <sys/param.h> //used for timing
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -17,9 +30,9 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    double timeI, timeII;
-    struct tms t, u;
-    long t1, t2;
+    double timeI; //holds the time in seconds
+    struct tms t, u;   //struct used for time
+    long t1, t2; //holds the time before and after the sort
     int i = 0;
 
     ifstream infile(argv[1]);
@@ -52,7 +65,7 @@ int main(int argc, char *argv[])
     	t2 = times(&u);   // ** t1 & t2 are a stopwatch for # of ticks in this segement of code
     	//below divides the number of clock ticks taken to generate the numbers by
     	// HZ which is the number of clock ticks/sec (a system defined number)
-    	timeI = (double)(u.tms_utime-t.tms_stime)/(HZ);  // #ofTicks/HZ(processor speed)
+    	timeI = static_cast<double>(u.tms_utime-t.tms_stime)/(HZ);  // #ofTicks/HZ(processor speed)
 
     	it1 = list.begin();
     	//while loop prints out first 100 sorted entries in list
@@ -71,7 +84,7 @@ int main(int argc, char *argv[])
     	i = 0;
     	while(it1 != list.end())//while loop that sums the size of the entire list
     	{
-    		sum += double(sizeof((*it1))); //finds the size of the vector
+    		sum += static_cast<double>((sizeof((*it1)))); //finds the size of the vector
     		++it1;
     	}
     	cout << "Size: " << (sum/1000) << "KB" << endl;
@@ -97,7 +110,7 @@ int main(int argc, char *argv[])
     	t2 = times(&u);   // ** t1 & t2 are a stopwatch for # of ticks in this segement of code
     	//below divides the number of clock ticks taken to generate the numbers by
     	// HZ which is the number of clock ticks/sec (a system defined number)
-    	timeI = (double)(u.tms_utime-t.tms_stime)/(HZ);  // #ofTicks/HZ(processor speed)
+    	timeI = static_cast<double>(u.tms_utime-t.tms_stime)/(HZ);  // #ofTicks/HZ(processor speed)
     	it1 = list.begin();
 
     	//while loop prints out first 100 sorted entries in list
@@ -117,7 +130,7 @@ int main(int argc, char *argv[])
     	while(it1 != list.end()) //while loop that sums the size of the entire list
     	{
     		//finds the size of the pointer in the iterator and the size of the vector it is pointing to.
-    		sum += double(sizeof((*it1))) + double(sizeof((*(*it1))));
+    		sum += static_cast<double>(sizeof((*it1))) + static_cast<double>(sizeof((*(*it1))));
     	    ++it1;
     	}
 
